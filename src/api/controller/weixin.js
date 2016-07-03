@@ -80,20 +80,29 @@ export default class extends Base {
     return resultArr
   }
 
+  /**
+   * 文章分类
+   *
+   * type: 文章类型
+   * /api/weixin/group        所有分类
+   * /api/weixin/group?type=0 当前分类
+   *
+   * @returns {*}
+   */
   async groupAction() {
     let items = [{name: '热门'}, {name: '推荐'}, {name: '段子手'}];
+    const type = parseInt(this.get('type') || -1);
 
-    // let res = await items.map(async(item, index) => {
-    //   let url = `http://weixin.sogou.com/pcindex/pc/pc_${index}/pc_${index}.html`;
-    //   // console.log(url);
-    //   let resultArr = await this._get(url);
-    //
-    //   // console.log(resultArr)
-    //   // item.item = resultArr;
-    //   console.log(222)
-    // })
+    if (isNaN(type) || type < -1 || type >= items.length) {
+      return this.fail('参数错误');
+    }
 
-    let index = 0;
+    if (type !== -1) {
+      items = [items[type]];
+    }
+
+    let index = type > -1 ? type : 0;
+
     for (let item of items) {
       let url = `http://weixin.sogou.com/pcindex/pc/pc_${index}/pc_${index}.html`;
       // console.log(url);
