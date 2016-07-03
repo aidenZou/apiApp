@@ -1,0 +1,16 @@
+{
+  "apps": [{
+    "name": "apiApp",
+    "script": "www/production.js",
+    "cwd": "/Users/aidenZou/www/github/apiApp",
+    "exec_mode": "cluster",
+    "instances": 0,
+    "max_memory_restart": "1G",
+    "autorestart": true,
+    "node_args": [],
+    "args": [],
+    "env": {
+      
+    }
+  }]
+}
